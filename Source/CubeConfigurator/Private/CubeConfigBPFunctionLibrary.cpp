@@ -3,6 +3,8 @@
 
 #include "CubeConfigBPFunctionLibrary.h"
 
+#include "JsonObjectConverter.h"
+
 void UCubeConfigBPFunctionLibrary::ExportToJson(FCubeMaterial StructToExport)
 {
 	/*FString Path = FPaths::ProjectDir();
@@ -13,8 +15,11 @@ void UCubeConfigBPFunctionLibrary::ExportToJson(FCubeMaterial StructToExport)
 
 	FFileHelper::SaveStringToFile(Path, *FileName);*/
 
-	FString FilePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir()) + TEXT("/MessageLog.txt");
-	FString FileContent = TEXT("This is a line of text to put in the file.\n") ;
+	FString FileContent;
+
+	FJsonObjectConverter::UStructToJsonObjectString(StructToExport, FileContent);
+
+	FString FilePath = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir()) + TEXT("/MessageLog.json");
 	FFileHelper::SaveStringToFile(FileContent, *FilePath, FFileHelper::EEncodingOptions::AutoDetect, &IFileManager::Get(), EFileWrite::FILEWRITE_Append);
 	
 }
