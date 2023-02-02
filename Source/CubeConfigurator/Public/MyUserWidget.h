@@ -6,10 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "MyUserWidget.generated.h"
 
-/**
- * 
- */
-
+//Secondary struct for comfortable export to json file
 USTRUCT(BlueprintType)
 struct FCubeMaterial
 {
@@ -23,6 +20,7 @@ struct FCubeMaterial
 	
 };
 
+
 UCLASS()
 class CUBECONFIGURATOR_API UMyUserWidget : public UUserWidget
 {
@@ -31,6 +29,5 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Cube Configurator")
 	void ExportToJson(TArray<FCubeMaterial> CubeMaterials);
-
 	
 };
