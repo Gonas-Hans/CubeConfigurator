@@ -3,12 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
-#include "CubeConfigBPFunctionLibrary.generated.h"
+#include "Blueprint/UserWidget.h"
+#include "MyUserWidget.generated.h"
 
 /**
  * 
  */
+
 USTRUCT(BlueprintType)
 struct FCubeMaterial
 {
@@ -18,16 +19,18 @@ struct FCubeMaterial
 	FString Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category= "Cube Material")
-	UMaterialInterface* Material;
+	FString Material;
 	
 };
 
 UCLASS()
-class CUBECONFIGURATOR_API UCubeConfigBPFunctionLibrary : public UBlueprintFunctionLibrary
+class CUBECONFIGURATOR_API UMyUserWidget : public UUserWidget
 {
 	GENERATED_BODY()
+public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Cube Configurator")
-	static void ExportToJson(FCubeMaterial StructToExport);
+	void ExportToJson(TArray<FCubeMaterial> CubeMaterials);
+
 	
 };
